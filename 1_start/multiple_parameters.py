@@ -25,8 +25,7 @@ async def update_item(
     importance: int = Body(default=Required, gt=0),
     q: str | None = Query(default=None)
 ):
-    results = {"item_id": item_id, "item": item,
-               "user": user, "importance": importance}
+    results = {"item_id": item_id, "item": item, "user": user, "importance": importance}
     if q:
         results.update({"q": q})
     return results

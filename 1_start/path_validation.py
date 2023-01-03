@@ -7,7 +7,7 @@ app = FastAPI()
 @app.get("/items/a/{item_id}")
 async def read_items(
     item_id: int = Path(title="ID of item to get"),
-    q: str | None = Query(default=None, alias="item-query")
+    q: str | None = Query(default=None, alias="item-query"),
 ):
     results = {"item_id": item_id}
     if q:
@@ -19,7 +19,7 @@ async def read_items(
 @app.get("/items/b/{item_id}")
 async def read_items(
     item_id: int = Path(title="ID of item to get", ge=1),
-    q: str | None = Query(default=None, alias="item-query")
+    q: str | None = Query(default=None, alias="item-query"),
 ):
     results = {"item_id": item_id}
     if q:
@@ -30,7 +30,7 @@ async def read_items(
 @app.get("/items/c/{item_id}")
 async def read_items(
     item_id: int = Path(title="ID of item to get", ge=0, le=100),
-    q: str | None = Query(default=None, alias="item-query")
+    q: str | None = Query(default=None, alias="item-query"),
 ):
     results = {"item_id": item_id}
     if q:

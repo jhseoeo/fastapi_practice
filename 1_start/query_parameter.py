@@ -35,6 +35,5 @@ async def read_item(item_id: str, q: str | None = None, short: bool = False):
 # limit : skippable, may not be exist
 @app.get("/items/needy/{item_id}")
 async def reqd_item(item_id: str, needy: str, skip: int = 0, limit: int | None = None):
-    item_id = {"item_id": item_id,
-               "needy": needy, "skip": skip, "limit": limit}
+    item_id = {"item_id": item_id, "needy": needy, "skip": skip, "limit": limit}
     return item_id

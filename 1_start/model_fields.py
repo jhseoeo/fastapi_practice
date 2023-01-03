@@ -13,10 +13,8 @@ class Image(BaseModel):
 # model field, nested model
 class Item(BaseModel):
     name: str
-    description: str | None = Field(
-        default=None, title="description", max_length=300)
-    price: float | None = Field(
-        gt=0, description="price")
+    description: str | None = Field(default=None, title="description", max_length=300)
+    price: float | None = Field(gt=0, description="price")
     tax: float | None = None
     tags: set[str] = set()
     image: list[Image] | None = None

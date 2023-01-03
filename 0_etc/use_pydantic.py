@@ -13,7 +13,7 @@ class User(BaseModel):
 external_data = {
     "userid": "123",
     "signup": "2023-01-01 12:00",
-    "friends": [1, "2", b"3"]
+    "friends": [1, "2", b"3"],
 }
 
 user = User(**external_data)
