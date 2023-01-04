@@ -1,3 +1,4 @@
+from typing import Union
 from datetime import datetime, date, time, timedelta
 from uuid import UUID
 from fastapi import Body, FastAPI
@@ -9,11 +10,15 @@ app = FastAPI()
 @app.put("/items/{item_id}")
 async def read_items(
     item_id: UUID,
-    start_datetime: datetime | None = Body(default=None),
-    end_date: date | None = Body(default=None),
-    repeat_at: time | None = Body(default=None),
-    process_after: timedelta | None = Body(default=None),
+    start_datetime: Union[datetime, None] = Body(default=None),
+    end_date: Union[date, None] = Body(default=None),
+    repeat_at: Union[time, None] = Body(default=None),
+    process_after: Union[timedelta, None] = Body(default=None),
 ):
+    """
+    ### there is many useful parameter types that can be converted to python datatypes
+    """
+
     start_process = start_datetime + process_after
     duration = end_date - start_process
     return {

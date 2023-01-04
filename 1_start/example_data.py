@@ -1,3 +1,4 @@
+from typing import Union
 from fastapi import FastAPI, Body
 from pydantic import BaseModel
 
@@ -7,17 +8,20 @@ app = FastAPI()
 
 class Item(BaseModel):
     name: str
-    description: str | None = None
+    description: Union[str, None] = None
     price: float
-    tax: float | None = None
+    tax: Union[float, None] = None
 
 
-# model with example data
 class Item_(BaseModel):
+    """
+    ### model with example data
+    """
+
     name: str
-    description: str | None = None
+    description: Union[str, None] = None
     price: float
-    tax: float | None = None
+    tax: Union[float, None] = None
 
     class Config:
         schema_extra = {
@@ -32,11 +36,13 @@ class Item_(BaseModel):
 
 @app.put("/items/ex1/{item_id}")
 async def update_item(item_id: int, item: Item_):
+    """
+    ### body with model example
+    """
     results = {"item_id": item_id, "item": item}
     return results
 
 
-# body with example
 @app.put("/items/ex2/{item_id}")
 async def update_item(
     item_id: int,
@@ -49,11 +55,13 @@ async def update_item(
         }
     ),
 ):
+    """
+    ### body with parameter example
+    """
     results = {"item_id": item_id, "item": item}
     return results
 
 
-# body with multiple examples
 @app.put("/items/ex3/{item_id}")
 async def update_item(
     item_id: int,
@@ -80,5 +88,8 @@ async def update_item(
         }
     ),
 ):
+    """
+    # body with multiple parameter examples
+    """
     results = {"item_id": item_id, "item": item}
     return results

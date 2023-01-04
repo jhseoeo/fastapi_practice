@@ -1,3 +1,4 @@
+from typing import List, Union
 from datetime import datetime
 from pydantic import BaseModel
 
@@ -5,8 +6,8 @@ from pydantic import BaseModel
 class User(BaseModel):
     userid: int
     name: str = "홍길동"
-    signup: datetime | None = None
-    friends: list[int] = []
+    signup: Union[datetime, None] = None
+    friends: List[int] = []
 
 
 # the data is casted to match User's declaration

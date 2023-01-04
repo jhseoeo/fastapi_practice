@@ -1,3 +1,4 @@
+from typing import Union, List, Set
 from fastapi import Body, FastAPI
 from pydantic import BaseModel, Field, HttpUrl
 
@@ -10,17 +11,25 @@ class Image(BaseModel):
     name: str
 
 
-# model field, nested model
 class Item(BaseModel):
+    """
+    ### nested model, using model field
+    """
+
     name: str
-    description: str | None = Field(default=None, title="description", max_length=300)
-    price: float | None = Field(gt=0, description="price")
-    tax: float | None = None
-    tags: set[str] = set()
-    image: list[Image] | None = None
+    description: Union[str, None] = Field(
+        default=None, title="description", max_length=300
+    )
+    price: Union[float, None] = Field(gt=0, description="price")
+    tax: Union[float, None] = None
+    tags: Set[str] = set()
+    image: Union[List[Image], None] = None
 
 
 @app.put("/items/{items_id}")
 async def update_item(item_id: int, item: Item = Body(embed=True)):
+    """
+    ### a request body which uses model field
+    """
     results = {"item_id": item_id, "item": item}
     return results

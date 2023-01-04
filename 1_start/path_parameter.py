@@ -12,24 +12,33 @@ class ModelName(str, Enum):
 
 @app.get("/")
 async def root():
+    """
+    ### basic route
+    """
     return {"message": "Hello World!"}
 
 
-# duplicated path with path parameter should be declared before path parameter
 @app.get("/items/me")
 async def read_you():
+    """
+    # duplicated path with path parameter should be declared before path parameter
+    """
     return {"item_id": "it's about you"}
 
 
-# path parameters
 @app.get("/items/{item_id}")
 async def read_item(item_id: int):
+    """
+    # path parameters
+    """
     return {"item_id": item_id}
 
 
-# predefined path parameter values using Enum class
 @app.get("/models/{model_name}")
 async def get_model(model_name: ModelName):
+    """
+    # predefined path parameter values using Enum class
+    """
     if model_name is ModelName.a:
         return {"model_name": model_name, "message": "AAA"}
     elif model_name.value == "B":
@@ -37,7 +46,9 @@ async def get_model(model_name: ModelName):
     return {"model_name": model_name, "message": "rest"}
 
 
-# Path parameters containing slash(/), such as paths
 @app.get("/models/file/{file_path:path}")
 async def read_file(file_path: str):
+    """
+    # Path parameters containing slash(/), such as paths
+    """
     return {"path": file_path}

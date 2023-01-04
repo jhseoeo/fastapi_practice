@@ -1,20 +1,23 @@
+from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
 
 
 class Item(BaseModel):
     name: str
-    description: str | None = None
+    description: Union[str, None] = None
     price: float
-    tax: float | None = None
+    tax: Union[float, None] = None
 
 
 app = FastAPI()
 
 
-# request body => item
 @app.post("/items/")
 async def create_item(item: Item):
+    """
+    ### request body => item
+    """
     item_dict = item.dict()
     if item.tax:
         price_with_tax = item.price + item.tax
@@ -26,7 +29,7 @@ async def create_item(item: Item):
 # item : pydantic model => request body
 # q : singular type => query parameter
 @app.put("/items/{item_id}")
-async def create_item(item_id: int, item: Item, q: str | None = None):
+async def create_item(item_id: int, item: Item, q: Union[str, None] = None):
     result = {"item_id": item_id, **item.dict()}
     if q:
         result.update({"q": q})
