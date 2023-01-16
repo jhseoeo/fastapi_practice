@@ -16,12 +16,7 @@ jobs:
           
       - name: PR-Slack-Notify
         id: notice
-        uses: slackapi/slack-github-action@v1.23.0
-        with: 
-          payload: |
-            {
-              "title": ${{ toJSON(github.event.pull_request.title) }},
-              "text": ${{ toJSON(steps.convert.outputs.text) }}
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        uses: fjogeleit/http-request-action@v1.12.0
+        with:
+          url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          data: '{"title": ${{ toJSON(github.event.pull_request.title) }}, "text": ${{ toJSON(steps.convert.outputs.text) }} }'
