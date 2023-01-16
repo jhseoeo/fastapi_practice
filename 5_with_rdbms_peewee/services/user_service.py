@@ -18,7 +18,7 @@ class UserService:
         )
         await UserORM.save(user)
         user_group = UserGroup(user_id=user_request.userId, group_id=group_id)
-        user_group.save()
+        user_group.save(force_insert=True)
 
         return user
 

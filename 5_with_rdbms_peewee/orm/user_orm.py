@@ -8,10 +8,11 @@ class UserORM:
 
     @staticmethod
     async def save(user: User):
-        if await UserORM.find_by_user_id(user.user_id) is not None:
-            user.save()
-        else:
-            user.save(force_insert=True)
+        User.insert(user.dict()).on_conflict(
+            action="update",
+            conflict_target=(*User.fields_pk(),),
+            update={**user.field_dict()},
+        ).execute()
 
     @staticmethod
     async def delete(user: User):
