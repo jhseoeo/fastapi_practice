@@ -21,7 +21,7 @@ jobs:
           payload: |
             {
               "title": ${{ toJSON(github.event.pull_request.title) }},
-              "body": ${{ toJSON(steps.convert.outputs.text) }}
+              "text": ${{ toJSON(steps.convert.outputs.text) }}
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
