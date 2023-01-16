@@ -8,13 +8,20 @@ jobs:
   send-message:
     runs-on: ubuntu-latest
     steps:
+      - name: Parse-markdown-slackify
+        id: convert
+        uses: LoveToKnow/slackify-markdown-action@v1.0.0
+        with:
+          text: ${{ github.event.pull_request.body }}
+          
       - name: PR-Slack-Notify
+        id: notice
         uses: slackapi/slack-github-action@v1.23.0
         with: 
           payload: |
             {
               "title": ${{ toJSON(github.event.pull_request.title) }},
-              "body": ${{ toJSON(github.event.pull_request.body) }}
+              "body": ${{ toJSON(steps.convert.outputs.text) }}
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
