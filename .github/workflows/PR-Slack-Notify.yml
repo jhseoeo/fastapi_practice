@@ -13,8 +13,8 @@ jobs:
         with: 
           payload: |
             {
-              "title": ${{ github.event.pull_request.title }},
-              "body": ${{ github.event.pull_request.body }}
+              "title": "${{ github.event.pull_request.title }}",
+              "body": "${{ github.event.pull_request.body }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
