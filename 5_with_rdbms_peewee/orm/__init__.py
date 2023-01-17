@@ -37,7 +37,7 @@ class PostgreSQL:
         PW = os.environ.get("DB_PW")
         DB = os.environ.get("DB_DB")
         self.__db = PostgresqlExtDatabase(
-            DB, host=HOST, port=PORT, user=ID, password=PW, autorollback=True
+            DB, host=HOST, port=PORT, user=ID, password=PW
         )
         self.__db._state = PeeweeConnectionState()
 

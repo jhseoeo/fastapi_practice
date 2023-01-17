@@ -8,14 +8,22 @@ router = APIRouter(prefix="/pet", tags=["pets"])
 
 @router.put("/")
 async def add_pet_data(pet: PetDTO):
-    pet = await PetService.addPetData(pet_request=pet)
-    print(pet)
-    return pet
+    return await PetService.addPetData(pet_request=pet)
+
+
+@router.put("/list")
+async def add_pet_list(pet: PetDTO):
+    return await PetService.addPetList(pet_request=pet)
 
 
 @router.get("/{pet_id}", response_model=PetDTO)
 async def get_pet_data(pet_id: str):
     return await PetService.getPetData(pet_id=pet_id)
+
+
+@router.get("/group/{group_id}")
+async def get_pet_data_by_group_id(group_id: str):
+    return await PetService.getPetDataByGroupId(group_id=group_id)
 
 
 @router.post("/{pet_id}")

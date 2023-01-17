@@ -20,6 +20,18 @@ async def modify_group_data(group_id: str, group: GroupDTO):
     return await GroupService.modifyGroupData(group_id=group_id, group_request=group)
 
 
-@router.delete("/{group_id}")
+@router.get("/list/{group_id}")
+async def get_group_data_by_user_id(user_id: str):
+    return await GroupService.getGroupDataByUserId(user_id=user_id)
+
+
+@router.post("/list/{group_id}")
+async def modify_group_data(group_id: str, group: GroupDTO):
+    return await GroupService.modifyGroupDataList(
+        group_id=group_id, group_request=group
+    )
+
+
+@router.delete("/list/{group_id}")
 async def delete_group_data(group_id: str):
-    return await GroupService.deleteGroupData(group_id=group_id)
+    return await GroupService.deleteGroupDataByIdList(group_id=group_id)
