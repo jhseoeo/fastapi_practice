@@ -20,5 +20,5 @@ jobs:
         with:
           url: ${{ secrets.SLACK_WEBHOOK_URL }}
           data: | 
-            ${{ format('"text":{0}', toJSON( format('*{0}*
+            ${{ format('{{"text":{0}}}', toJSON( format('*{0}*
             {1}', github.event.pull_request.title, steps.convert.outputs.text))) }}
